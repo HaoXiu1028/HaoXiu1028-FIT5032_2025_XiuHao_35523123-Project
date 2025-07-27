@@ -2,14 +2,14 @@
     <div>
       <div class="section-title">
         <i class="fas fa-bolt"></i>
-        <h2>快速访问</h2>
+        <h2>Quick Access</h2>
       </div>
       <div class="quick-access">
         <div v-for="(item, index) in accessItems" :key="index" class="access-card">
           <i :class="item.icon"></i>
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
-          <a href="#" class="btn">{{ item.buttonText }}</a>
+          <a href="#" class="btn" @click.prevent="handleAccess(index)">{{ item.buttonText }}</a>
         </div>
       </div>
     </div>
@@ -23,23 +23,41 @@
         accessItems: [
           {
             icon: 'fas fa-notes-medical',
-            title: '健康资源中心',
-            description: '获取传染病预防、慢性病管理和心理健康支持等专业健康资源',
-            buttonText: '查看资源'
+            title: 'Service Evaluation Center',
+            description: 'Users can evaluate the systems services (Health Resource Center, Community Interaction, Medical Service Connection) on a scale of 1 to 10',
+            buttonText: 'Start Evaluation'
           },
           {
             icon: 'fas fa-calendar-check',
-            title: '医疗服务对接',
-            description: '快速预约远程医疗服务，获取医保支持，寻找附近医院和药房',
-            buttonText: '预约服务'
+            title: 'Medical Service Coordination',
+            description: 'Quickly schedule telemedicine services, access medical insurance support, and find nearby hospitals and pharmacies',
+            buttonText: 'Schedule Service'
           },
           {
             icon: 'fas fa-comments',
-            title: '社区互动',
-            description: '参与社区论坛，查看活动日历，加入志愿者团队交流心得',
-            buttonText: '加入社区'
+            title: 'Community Interaction',
+            description: 'Participate in community forums, view event calendars, and join volunteer teams to share experiences',
+            buttonText: 'Join the Community'
           }
         ]
+      }
+    },
+    methods: {
+      handleAccess(index) {
+        if (index === 0) {
+          // 第一个按钮是"开始评价"
+          this.$router.push({ name: 'RatingPage' });
+        } else if (index === 1) {
+          // 第二个按钮是"预约服务"
+          console.log('预约服务');
+          // 可以在这里添加实际的路由名称
+          // this.$router.push({ name: 'AppointmentPage' });
+        } else if (index === 2) {
+          // 第三个按钮是"加入社区"
+          console.log('加入社区');
+          // 可以在这里添加实际的路由名称
+          // this.$router.push({ name: 'CommunityPage' });
+        }
       }
     }
   }

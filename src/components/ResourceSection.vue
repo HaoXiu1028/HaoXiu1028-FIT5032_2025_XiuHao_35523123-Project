@@ -2,7 +2,7 @@
     <div>
       <div class="section-title">
         <i class="fas fa-book-medical"></i>
-        <h2>健康资源中心</h2>
+        <h2>Health Resource Center</h2>
       </div>
       <div class="resource-grid">
         <ResourceCard v-for="(resource, index) in resources" :key="index" :resource="resource" />
@@ -23,38 +23,38 @@
         resources: [
           {
             icon: 'fas fa-virus',
-            title: '传染病预防',
+            title: 'Infectious Disease Prevention',
             items: [
-              '疫苗指南与接种日历',
-              '感染控制与预防建议',
-              '季节性传染病应对措施'
+              'Vaccination Guidelines and Schedule',
+              'Infection Control and Prevention Recommendations',
+              'Seasonal Infectious Disease Response Measures'
             ]
           },
           {
             icon: 'fas fa-heartbeat',
-            title: '慢性病管理',
+            title: 'Chronic Disease Management',
             items: [
-              '糖尿病管理工具包',
-              '高血压管理计划',
-              '健康饮食与运动指南'
+              'Diabetes Management Toolkit',
+              'Hypertension Management Plan',
+              'Healthy Diet and Exercise Guide'
             ]
           },
           {
             icon: 'fas fa-brain',
-            title: '心理健康',
+            title: 'Mental Health',
             items: [
-              '心理咨询服务指南',
-              '危机干预热线',
-              '减压与情绪管理技巧'
+            'Psychological Counseling Service Guide',
+              'Crisis Intervention Hotline',
+              'Stress Reduction and Emotional Management Techniques'
             ]
           },
           {
             icon: 'fas fa-child',
-            title: '儿童健康',
+            title: 'Childrens Health',
             items: [
-              '儿童疫苗接种计划',
-              '学校健康政策指南',
-              '儿童营养与发育'
+            'Childrens Vaccination Schedule',
+              'School Health Policy Guide',
+              'Childrens Nutrition and Development'
             ]
           }
         ]

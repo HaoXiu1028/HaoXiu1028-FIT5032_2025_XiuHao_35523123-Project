@@ -1,22 +1,12 @@
 <template>
   <header class="header">
     <!-- 原有头部内容 -->
-    <div class="logo">My Immigrant Health System</div>
+    <!-- <div class="logo">My Immigrant Health System</div> -->
     
-    <!-- 新增登录按钮 -->
-    <button @click="goToLogin">Login</button>
+
   </header>
 </template>
 
-<script>
-export default {
-  methods: {
-    goToLogin() {
-      this.$router.push('/login')
-    }
-  }
-}
-</script>
 
 <style scoped>
 .header {

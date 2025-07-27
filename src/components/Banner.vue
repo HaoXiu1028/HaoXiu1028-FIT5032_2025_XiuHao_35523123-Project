@@ -10,8 +10,8 @@
     name: 'Banner',
     data() {
       return {
-        title: '欢迎来到移民健康导航系统',
-        description: '为您提供全面、便捷的健康管理服务，帮助您轻松适应新的健康环境'
+        title: 'Welcome to the Immigrant Health Navigation System',
+        description: 'Providing comprehensive and convenient health management services to help you easily adapt to your new health environment'
       }
     }
   }

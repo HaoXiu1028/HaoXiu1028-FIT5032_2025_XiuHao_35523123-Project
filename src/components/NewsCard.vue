@@ -4,7 +4,7 @@
       <div class="news-content">
         <h3>{{ news.title }}</h3>
         <p>{{ news.content }}</p>
-        <a :href="news.link" class="btn btn-outline">查看详情</a>
+        <a :href="news.link" class="btn btn-outline">Detalis</a>
       </div>
     </div>
   </template>
