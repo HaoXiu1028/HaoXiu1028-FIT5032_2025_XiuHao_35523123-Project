@@ -8,6 +8,7 @@
       <ResourceSection />
     </main>
     <Footer />
+    <router-view></router-view>
   </div>
 </template>
 
