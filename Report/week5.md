@@ -1,3 +1,25 @@
+### EFOLIO TASK 5.1
+#### Screenshot 1
+![alt text](image-3.png)
+#### Screenshot 2:
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-8.png)
+![alt text](image-9.png)
+
+
+
+### EFOLIO TASK 5.2
+#### router/index.js
+![alt text](image-11.png)
+#### src/App.vue
+![alt text](image-10.png)
+#### src/views/HomeView.vue
+```html
 <script setup>
 import { ref } from 'vue'
 import DataTable from 'primevue/datatable'
@@ -13,26 +35,6 @@ const formData = ref({
   suburb: 'Clayton'
 })
 
-const submittedCards = ref([])
-
-const submitForm = () => {
-  validateName(true)
-  validatePassword(true)
-  if (!errors.value.username && !errors.value.password) {
-    submittedCards.value.push({ ...formData.value })
-    clearForm()
-  }
-}
-
-const clearForm = () => {
-  formData.value = {
-    username: '',
-    password: '',
-    isAustralian: false,
-    reason: '',
-    gender: ''
-  }
-}
 
 const errors = ref({
   username: null,
@@ -42,6 +44,18 @@ const errors = ref({
   gender: null,
   reason: null
 })
+
+
+const submittedCards = ref([])
+
+
+const validateConfirmPassword = (blur) => {
+  if (formData.value.password !== formData.value.confirmPassword) {
+    if (blur) errors.value.confirmPassword = 'Passwords do not match.'
+  } else {
+    errors.value.confirmPassword = null
+  }
+}
 
 const validateName = (blur) => {
   if (formData.value.username.length < 3) {
@@ -74,17 +88,6 @@ const validatePassword = (blur) => {
   }
 }
 
-/**
- * Confirm password validation function that checks if the password and confirm password fields match.
- * @param blur: boolean - If true, the function will display an error message if the passwords do not match.
- */
-const validateConfirmPassword = (blur) => {
-  if (formData.value.password !== formData.value.confirmPassword) {
-    if (blur) errors.value.confirmPassword = 'Passwords do not match.'
-  } else {
-    errors.value.confirmPassword = null
-  }
-}
 
 const validateReason = (blur) => {
   const reason = formData.value.reason.trim()
@@ -96,13 +99,38 @@ const validateReason = (blur) => {
   if (reason.toLowerCase().includes('friend')) {
     errors.value.reason = null
   } else {
-    if (blur) errors.value.reason = null // 可选：你可以保留或去掉这行，取决于你是否要对未包含 friend 也做提醒
+    if (blur) errors.value.reason = null
+  }
+}
+
+
+ 
+const submitForm = () => {
+  validateName(true)
+  validatePassword(true)
+  validateConfirmPassword(true)
+  
+  if (!errors.value.username && !errors.value.password && !errors.value.confirmPassword) {
+    submittedCards.value.push({ ...formData.value })
+    clearForm()
+  }
+}
+
+
+const clearForm = () => {
+  formData.value = {
+    username: '',
+    password: '',
+    comfirmPassword: '',
+    isAustralian: false,
+    reason: '',
+    gender: ''
   }
 }
 </script>
 
 <template>
-  <!-- 🗄️ W3. Library Registration Form -->
+  <!-- 🗄️ W4. Library Registration Form -->
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-8 offset-md-2">
@@ -114,13 +142,6 @@ const validateReason = (blur) => {
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" @blur="() => validateName(true)"
-                @input="() => validateName(false)" v-model="formData.username" />
-              <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
               <label for="gender" class="form-label">Gender</label>
               <select class="form-select" id="gender" v-model="formData.gender" required>
                 <option value="male">Male</option>
@@ -128,33 +149,48 @@ const validateReason = (blur) => {
                 <option value="other">Other</option>
               </select>
             </div>
+            <div class="col-md-6 col-sm-6">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" 
+                @blur="() => validateName(true)"
+                @input="() => validateName(false)" 
+                v-model="formData.username" />
+              <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
+            </div>
           </div>
+
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" @blur="() => validatePassword(true)"
-                @input="() => validatePassword(false)" v-model="formData.password" />
+              <input type="password" class="form-control" id="password" 
+                @blur="() => validatePassword(true)"
+                @input="() => validatePassword(false)" 
+                v-model="formData.password" />
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
             </div>
             <div class="col-md-6 col-sm-6">
               <label for="confirm-password" class="form-label">Confirm password</label>
-              <input type="password" class="form-control" id="confirm-password" v-model="formData.confirmPassword"
+              <input type="password" class="form-control" id="confirm-password" 
+                v-model="formData.confirmPassword"
                 @blur="() => validateConfirmPassword(true)" />
               <div v-if="errors.confirmPassword" class="text-danger">{{ errors.confirmPassword }}</div>
             </div>
           </div>
 
-          <div class="col-md-6 col-sm-6">
+          <div class="col-md-6 col-sm-6 mb-3">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="isAustralian" v-model="formData.isAustralian" />
+              <input type="checkbox" class="form-check-input" id="isAustralian" 
+                v-model="formData.isAustralian" />
               <label class="form-check-label" for="isAustralian">Australian Resident?</label>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="reason" class="form-label">Reason for joining</label>
-            <textarea class="form-control" id="reason" rows="3" v-model="formData.reason"
-              @blur="() => validateReason(true)" @input="() => validateReason(false)"></textarea>
+            <textarea class="form-control" id="reason" rows="3" 
+              v-model="formData.reason"
+              @blur="() => validateReason(true)"
+              @input="() => validateReason(false)"></textarea>
             <div v-if="errors.reason" class="text-danger">{{ errors.reason }}</div>
             <div v-else-if="formData.reason.toLowerCase().includes('friend')" class="text-success">
               Great to have a friend.
@@ -163,7 +199,8 @@ const validateReason = (blur) => {
 
           <div class="mb-3">
             <label for="suburb" class="form-label">Suburb</label>
-            <input type="text" class="form-control" id="suburb" v-bind:value="formData.suburb" />
+            <input type="text" class="form-control" id="suburb" 
+              v-bind:value="formData.suburb" />
           </div>
 
           <div class="text-center">
@@ -210,20 +247,9 @@ const validateReason = (blur) => {
   max-width: 80vw;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fefefe;
   border-radius: 10px;
 }
 
-/* Class selectors */
-.form {
-  text-align: center;
-  margin-top: 50px;
-}
-
-/* ID selectors */
-#username:focus,
-#password:focus,
-#isAustralian:focus,
 .card {
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -240,4 +266,18 @@ const validateReason = (blur) => {
 .list-group-item {
   padding: 10px;
 }
+
+@media (max-width: 768px) {
+  .form-control {
+    font-size: 0.9rem;
+  }
+}
 </style>
+```
+
+#### Screenshot of App in Localhost (browser) open on Home page
+![alt text](image-12.png)
+#### Screenshot of App in Localhost (browser) open on About page
+![alt text](image-13.png)
+#### Screenshots of Custom Routing
+![alt text](image-14.png)

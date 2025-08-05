@@ -1,23 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-
-import PrimeVue from 'primevue/config'
-import Aura from '@primevue/themes/aura'
-
-
-const app = createApp(App)
-app.use(PrimeVue, { theme: { preset: Aura } })
-app.use(router)
-
-app.mount('#app')
-
-
-
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCp5O2o4Fk76_gz5t1Wv0-xUwuPLbhMjhA",
@@ -30,3 +12,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+const db = getFirestore()
+export default db
