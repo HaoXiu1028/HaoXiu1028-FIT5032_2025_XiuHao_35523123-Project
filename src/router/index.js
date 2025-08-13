@@ -39,6 +39,7 @@ const routes = [
     name:'WeatherCheck',
     component:WeatherView
   },
+  
   {
     path:'/CountBookAPI',
     name:'CountBookAPI',
